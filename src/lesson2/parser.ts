@@ -1,4 +1,4 @@
-import { isNumber } from "./helpers";
+import { isNumber, isNumberItem } from "./helpers";
 import { mathOperators } from "./mathOperators";
 
 export type ParsedLineType = (number | string)[];
@@ -9,14 +9,14 @@ export const parser = (line: string): ParsedLineType | null => {
   return stack.reduce<ParsedLineType>((result, item, key) => {
     const prevItem = stack[key - 1];
 
-    const isValidNumberPush = !isNumber(prevItem) && isNumber(item);
+    const isValidNumberPush = !isNumberItem(prevItem) && isNumberItem(item);
     const isValidOperatorPush =
-      isNumber(prevItem) &&
-      !isNumber(item) &&
+      isNumberItem(prevItem) &&
+      !isNumberItem(item) &&
       mathOperators.hasOwnProperty(item);
 
     if (isValidNumberPush) {
-      result.push(Number(item));
+      result.push(item);
     } else if (isValidOperatorPush) {
       result.push(item);
     } else {
