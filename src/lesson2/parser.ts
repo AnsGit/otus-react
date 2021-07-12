@@ -1,4 +1,4 @@
-import { isNumber, isNumberItem } from "./helpers";
+import { isNumberItem } from "./helpers";
 import { mathOperators } from "./mathOperators";
 
 export type ParsedLineType = (number | string)[];

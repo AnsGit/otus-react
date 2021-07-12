@@ -1,4 +1,4 @@
-import { parser, ParsedLineType } from "./parser";
+import { parser } from "./parser";
 
 import { calc } from "./engine";
 

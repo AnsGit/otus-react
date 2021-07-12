@@ -9,10 +9,10 @@ import {
 const [FIRST, SECOND, THIRD, FOURTH] = mathPriorities;
 
 export const firstPrioritiesCalc = (stack: ParsedLineType): ParsedLineType => {
-  let match: Array<any> | null;
+  let match: Array<string> | null;
   let value: number, operation: string | undefined;
 
-  return stack.map((item, key) => {
+  return stack.map((item) => {
     match = String(item).match(numberItemRexExp);
 
     if (match === null) {
