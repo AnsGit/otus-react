@@ -1,35 +1,28 @@
-export type ScalarOperationType = (first: number, second: number) => number;
+export type ScalarOperationType = (num1: number, num2: number) => number;
 export type SingleOperationType = (value: number) => number;
 
-export const sqr: SingleOperationType = (value: number): number =>
-  pow(value, 2);
+export const sqr: SingleOperationType = (num: number): number => pow(num, 2);
 
-export const pow: ScalarOperationType = (
-  first: number,
-  second: number
-): number => first ** second;
+export const pow: ScalarOperationType = (num1: number, num2: number): number =>
+  num1 ** num2;
 
-export const mul: ScalarOperationType = (
-  first: number,
-  second: number
-): number => first * second;
+export const mul: ScalarOperationType = (num1: number, num2: number): number =>
+  num1 * num2;
 
-export const div: ScalarOperationType = (
-  first: number,
-  second: number
-): number => first / second;
+export const div: ScalarOperationType = (num1: number, num2: number): number =>
+  num1 / num2;
 
-export const add: ScalarOperationType = (
-  first: number,
-  second: number
-): number => first + second;
+export const add: ScalarOperationType = (num1: number, num2: number): number =>
+  num1 + num2;
 
 export const minus: ScalarOperationType = (
-  first: number,
-  second: number
-): number => first - second;
+  num1: number,
+  num2: number
+): number => num1 - num2;
 
-export const mathOperators: { [key: string]: any } = {
+export const mathOperators: {
+  [key: string]: any;
+} = {
   "**": sqr,
   "^": pow,
   "*": mul,

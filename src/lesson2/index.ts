@@ -7,7 +7,7 @@ const rl = createInterface({
   output: process.stdout,
 });
 
-const question = (): Promise<null> => {
+const question = (): Promise<void> => {
   return new Promise((resolve) => {
     rl.question("> ", (answer: string) => {
       try {
@@ -17,7 +17,7 @@ const question = (): Promise<null> => {
         console.log(`Result: ${e.message}. Try again.`);
       }
 
-      resolve(null);
+      resolve();
     });
   });
 };

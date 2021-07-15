@@ -15,9 +15,7 @@ export const parser = (line: string): ParsedLineType | null => {
       !isNumberItem(item) &&
       mathOperators.hasOwnProperty(item);
 
-    if (isValidNumberPush) {
-      result.push(item);
-    } else if (isValidOperatorPush) {
+    if (isValidNumberPush || isValidOperatorPush) {
       result.push(item);
     } else {
       throw new TypeError("Unexpected string");
