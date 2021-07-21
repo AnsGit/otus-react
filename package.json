@@ -8,7 +8,8 @@
     "build": "webpack --mode production",
     "test": "jest",
     "lint": "eslint --ext .ts,.tsx --fix ./",
-    "check": "npm test && npm run lint",
+    "test:loki": "npm run build-storybook && npx loki --requireReference --reactUri file:./storybook-static",
+    "check": "npm test && npm run lint && npm run test:loki",
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -16,7 +17,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint",
-      "pre-push": "npm test"
+      "pre-push": "npm test && npm run test:loki"
     }
   },
   "repository": {
@@ -54,6 +55,7 @@
     "html-webpack-plugin": "^5.3.2",
     "husky": "^7.0.1",
     "jest": "^27.0.6",
+    "loki": "^0.28.1",
     "prettier": "^2.3.2",
     "ts-node": "^10.1.0",
     "typescript": "^4.3.5",
@@ -64,5 +66,20 @@
   "dependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
+  },
+  "loki": {
+    "configurations": {
+      "chrome.laptop": {
+        "target": "chrome.docker",
+        "width": 1920,
+        "height": 1080,
+        "deviceScaleFactor": 1,
+        "mobile": false
+      },
+      "chrome.iphone7": {
+        "target": "chrome.docker",
+        "preset": "iPhone 7"
+      }
+    }
   }
 }
