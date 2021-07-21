@@ -8,7 +8,6 @@
     "test": "jest",
     "lint": "eslint --ext .ts,.tsx --fix ./",
     "check": "npm test && npm run lint",
-    "calc": "ts-node src/lesson2",
     "prepare": "husky install"
   },
   "husky": {
