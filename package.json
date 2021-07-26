@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --mode development --open --hot",
+    "start": "webpack serve --mode development --hot",
     "build": "webpack --mode production",
     "test": "jest",
     "lint": "eslint --ext .ts,.tsx --fix ./",
     "test:loki": "npm run build-storybook && npx loki --requireReference --reactUri file:./storybook-static",
     "check": "npm test && npm run lint && npm run test:loki",
     "prepare": "husky install",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 --ci",
     "build-storybook": "build-storybook"
   },
   "husky": {
