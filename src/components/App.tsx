@@ -24,7 +24,6 @@ interface AppProps {
  * App with cells
  */
 export const App: React.FC<AppProps> = ({
-  primary = false,
   size = [100, 100],
   cell = { size: 10 },
   grid = true,
