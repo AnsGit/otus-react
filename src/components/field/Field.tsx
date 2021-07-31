@@ -1,5 +1,4 @@
 import React from "react";
-import _ from "lodash";
 
 import { Svg } from "@/components/svg";
 import Cell from "./Cell";

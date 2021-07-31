@@ -46,7 +46,9 @@ const Rect: React.FC<RectProps> = ({
   style = {},
   ...props
 }: RectProps) => {
-  return <rect x={x} y={y} width={width} height={height} {...props} />;
+  return (
+    <rect x={x} y={y} width={width} height={height} style={style} {...props} />
+  );
 };
 
 export default Rect;
