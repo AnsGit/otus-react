@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { App } from "./App";
+import App from "./App";
 
 export default {
   title: "Pixel Art Box/App",
@@ -15,7 +15,7 @@ Default.args = {};
 
 export const WithoutGrid = Template.bind({});
 WithoutGrid.args = {
-  grid: false,
+  toUseGrid: true,
 };
 
 export const WithSmallCells = Template.bind({});
