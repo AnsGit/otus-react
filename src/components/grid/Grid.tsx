@@ -5,7 +5,7 @@ import { Svg, Line, Rect } from "@/components/svg";
 
 interface GridProps {
   /**
-   * Size (number of cols and rows) of the Grid
+   * Size (number of cols and rows)
    */
   size?: [number, number];
   /**
@@ -65,15 +65,16 @@ const Grid: React.FC<GridProps> = ({
         height={height - line.strokeWidth}
         strokeWidth={line.strokeWidth}
         stroke={line.stroke}
+        fill="none"
       />
       {_.range(1, cols).map((x: number) => {
-        const left: number = x * cell.size - line.strokeWidth / 2;
+        const left: number = x * cell.size;
         return (
           <Line key={x} x1={left} y1={0} x2={left} y2={height} {...line} />
         );
       })}
       {_.range(1, rows).map((y: number) => {
-        const top: number = y * cell.size - line.strokeWidth / 2;
+        const top: number = y * cell.size;
         return <Line key={y} x1={0} y1={top} x2={width} y2={top} {...line} />;
       })}
     </Svg>

@@ -10,10 +10,6 @@ interface SvgProps {
    */
   height: number;
   /**
-   * Svg fill color
-   */
-  fill?: string;
-  /**
    * Custom Styles
    */
   style: {};
@@ -25,7 +21,6 @@ interface SvgProps {
 const Svg: React.FC<SvgProps> = ({
   width = 800,
   height = 600,
-  fill = "none",
   style = {},
   ...props
 }: SvgProps) => {
@@ -34,7 +29,6 @@ const Svg: React.FC<SvgProps> = ({
       width={width}
       height={height}
       viewBox={`0 0 ${width} ${height}`}
-      fill={fill}
       xmlns="http://www.w3.org/2000/svg"
       style={style}
     >

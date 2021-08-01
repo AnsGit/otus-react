@@ -6,11 +6,11 @@ interface CellProps {
   /**
    * x
    */
-  x: number;
+  x?: number;
   /**
    * y
    */
-  y: number;
+  y?: number;
   /**
    * Color
    */
@@ -29,8 +29,8 @@ interface CellProps {
  * Cell
  */
 const Cell: React.FC<CellProps> = ({
-  x,
-  y,
+  x = 0,
+  y = 0,
   color = "#fff",
   size = 20,
   style = {},

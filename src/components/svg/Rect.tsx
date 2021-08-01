@@ -4,19 +4,19 @@ interface RectProps {
   /**
    * start x
    */
-  x: number;
+  x?: number;
   /**
    * start y
    */
-  y: number;
+  y?: number;
   /**
    * Rect width
    */
-  width: number;
+  width?: number;
   /**
    * Rect height
    */
-  height: number;
+  height?: number;
   /**
    * Rect line width
    */
@@ -39,15 +39,28 @@ interface RectProps {
  * Rect
  */
 const Rect: React.FC<RectProps> = ({
-  x,
-  y,
-  width,
-  height,
+  x = 0,
+  y = 0,
+  width = 100,
+  height = 70,
+  strokeWidth = 1,
+  stroke = "none",
+  fill = "#ddd",
   style = {},
   ...props
 }: RectProps) => {
   return (
-    <rect x={x} y={y} width={width} height={height} style={style} {...props} />
+    <rect
+      x={x}
+      y={y}
+      width={width}
+      height={height}
+      strokeWidth={strokeWidth}
+      stroke={stroke}
+      fill={fill}
+      style={style}
+      {...props}
+    />
   );
 };
 

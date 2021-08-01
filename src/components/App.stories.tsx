@@ -15,20 +15,22 @@ Default.args = {};
 
 export const WithoutGrid = Template.bind({});
 WithoutGrid.args = {
-  toUseGrid: true,
+  toUseGrid: false,
 };
 
-export const WithSmallCells = Template.bind({});
-WithSmallCells.args = {
-  cell: { size: 5 },
-};
-
-export const WithMiddleCells = Template.bind({});
-WithMiddleCells.args = {
+export const SmallCells = Template.bind({});
+SmallCells.args = {
   cell: { size: 10 },
 };
 
-export const WithBigCells = Template.bind({});
-WithBigCells.args = {
+export const MiddleCells = Template.bind({});
+MiddleCells.args = {
+  size: [20, 15],
   cell: { size: 20 },
+};
+
+export const BigCells = Template.bind({});
+BigCells.args = {
+  size: [20, 15],
+  cell: { size: 30 },
 };

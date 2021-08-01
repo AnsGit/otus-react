@@ -5,7 +5,7 @@ import Cell from "./Cell";
 
 interface FieldProps {
   /**
-   * Size (number of cols and rows) of the Field
+   * Size (number of cols and rows)
    */
   size?: [number, number];
   /**
@@ -24,7 +24,7 @@ interface FieldProps {
   /**
    * Cells matrix
    */
-  matrix: string[][];
+  matrix?: string[][];
   /**
    * Custom Styles
    */
@@ -35,12 +35,20 @@ interface FieldProps {
  * Field
  */
 const Field: React.FC<FieldProps> = ({
-  size = [40, 30],
+  size = [8, 8],
   cell = {
     size: 20,
-    color: "#fff",
   },
-  matrix,
+  matrix = [
+    ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
+    ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
+    ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
+    ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
+    ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
+    ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
+    ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
+    ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
+  ],
   style = {},
   ...props
 }: FieldProps) => {

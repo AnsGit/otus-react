@@ -1,34 +1,29 @@
-// import React from "react";
-// import { ComponentStory, ComponentMeta } from "@storybook/react";
-//
-// import App from "./App";
-//
-// export default {
-//   title: "Pixel Art Box/App",
-//   component: App,
-// } as ComponentMeta<typeof App>;
-//
-// const Template: ComponentStory<typeof App> = (args) => <App {...args} />;
-//
-// export const Default = Template.bind({});
-// Default.args = {};
-//
-// export const WithoutGrid = Template.bind({});
-// WithoutGrid.args = {
-//   grid: false,
-// };
-//
-// export const WithSmallCells = Template.bind({});
-// WithSmallCells.args = {
-//   cell: { size: 5 },
-// };
-//
-// export const WithMiddleCells = Template.bind({});
-// WithMiddleCells.args = {
-//   cell: { size: 10 },
-// };
-//
-// export const WithBigCells = Template.bind({});
-// WithBigCells.args = {
-//   cell: { size: 20 },
-// };
+import React from "react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
+
+import Field from "./Field";
+
+export default {
+  title: "Pixel Art Box/Field/Instance",
+  component: Field,
+  argTypes: {},
+} as ComponentMeta<typeof Field>;
+
+const Template: ComponentStory<typeof Field> = (args) => <Field {...args} />;
+
+export const Default = Template.bind({});
+Default.args = {};
+
+export const ColoredCells = Template.bind({});
+ColoredCells.args = {
+  matrix: [
+    ["#fff", "#fff", "#fff", "purple", "purple", "#fff", "#fff", "#fff"],
+    ["#fff", "#fff", "purple", "#fff", "#fff", "purple", "#fff", "#fff"],
+    ["#fff", "purple", "#fff", "#fff", "#fff", "#fff", "purple", "#fff"],
+    ["purple", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "purple"],
+    ["#fff", "purple", "#fff", "#fff", "#fff", "#fff", "purple", "#fff"],
+    ["#fff", "#fff", "purple", "#fff", "#fff", "purple", "#fff", "#fff"],
+    ["#fff", "#fff", "#fff", "purple", "purple", "#fff", "#fff", "#fff"],
+    ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
+  ],
+};

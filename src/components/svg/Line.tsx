@@ -4,19 +4,19 @@ interface LineProps {
   /**
    * Start x
    */
-  x1: number;
+  x1?: number;
   /**
    * Start y
    */
-  y1: number;
+  y1?: number;
   /**
    * End x
    */
-  x2: number;
+  x2?: number;
   /**
    * End y
    */
-  y2: number;
+  y2?: number;
   /**
    * Line width
    */
@@ -35,10 +35,10 @@ interface LineProps {
  * Line
  */
 const Line: React.FC<LineProps> = ({
-  x1,
-  y1,
-  x2,
-  y2,
+  x1 = 0,
+  y1 = 0,
+  x2 = 100,
+  y2 = 100,
   strokeWidth = 1,
   stroke = "#ddd",
   style = {},

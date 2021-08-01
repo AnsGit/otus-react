@@ -5,7 +5,7 @@ import { Grid } from "./grid";
 
 interface AppProps {
   /**
-   * Size (number of cols and rows) of the field
+   * Field size (number of cols and rows)
    */
   size?: [number, number];
   /**
@@ -73,7 +73,7 @@ const App: React.FC<AppProps> = ({
   const height: number = rows * cell.size;
 
   const matrix: string[][] = _.range(rows).map((y: number) => {
-    return _.range(cols).map((x: number) => "#fff");
+    return _.range(cols).map((x: number) => cell.color);
   });
 
   return (
