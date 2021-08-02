@@ -19,7 +19,7 @@ const Template: ComponentStory<typeof Line> = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = { x1: 0, y1: 0, x2: 100, y2: 100 };
 
 export const Vertical = Template.bind({});
 Vertical.args = {

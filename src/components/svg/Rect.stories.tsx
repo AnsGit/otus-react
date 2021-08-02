@@ -20,7 +20,7 @@ const Template: ComponentStory<typeof Rect> = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = { x: 0, y: 0, width: 100, height: 70 };
 
 export const Square = Template.bind({});
 Square.args = {

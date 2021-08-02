@@ -21,22 +21,28 @@ const Template: ComponentStory<typeof Cell> = (args) => {
 };
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = { x: 0, y: 0 };
 
 export const Small = Template.bind({});
 Small.args = {
+  x: 0,
+  y: 0,
   color: "violet",
   size: 10,
 };
 
 export const Middle = Template.bind({});
 Middle.args = {
+  x: 0,
+  y: 0,
   color: "violet",
   size: 20,
 };
 
 export const Big = Template.bind({});
 Big.args = {
+  x: 0,
+  y: 0,
   color: "violet",
   size: 30,
 };
