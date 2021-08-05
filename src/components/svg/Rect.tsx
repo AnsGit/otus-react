@@ -48,7 +48,7 @@ const Rect: React.FC<RectProps> = ({
   fill = "#ddd",
   style = {},
   ...props
-}: RectProps) => {
+}) => {
   return (
     <rect
       x={x}

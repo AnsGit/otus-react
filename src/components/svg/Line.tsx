@@ -43,7 +43,7 @@ const Line: React.FC<LineProps> = ({
   stroke = "#ddd",
   style = {},
   ...props
-}: LineProps) => {
+}) => {
   return (
     <line
       x1={x1}

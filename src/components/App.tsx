@@ -66,7 +66,7 @@ const App: React.FC<AppProps> = ({
   },
   style = {},
   ...props
-}: AppProps) => {
+}) => {
   const [cols, rows] = size;
 
   const width: number = cols * cell.size;

@@ -50,7 +50,7 @@ const Grid: React.FC<GridProps> = ({
   },
   style = {},
   ...props
-}: GridProps) => {
+}) => {
   const [cols, rows] = size;
 
   const width: number = cols * cell.size;

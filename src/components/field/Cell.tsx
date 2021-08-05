@@ -35,7 +35,7 @@ const Cell: React.FC<CellProps> = ({
   size = 20,
   style = {},
   ...props
-}: CellProps) => {
+}) => {
   return (
     <Rect
       x={x * size}

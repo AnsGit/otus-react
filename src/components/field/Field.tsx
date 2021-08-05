@@ -51,7 +51,7 @@ const Field: React.FC<FieldProps> = ({
   ],
   style = {},
   ...props
-}: FieldProps) => {
+}) => {
   const [cols, rows] = size;
 
   const width: number = cols * cell.size;

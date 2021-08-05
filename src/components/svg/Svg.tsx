@@ -23,7 +23,7 @@ const Svg: React.FC<SvgProps> = ({
   height = 600,
   style = {},
   ...props
-}: SvgProps) => {
+}) => {
   return (
     <svg
       width={width}
