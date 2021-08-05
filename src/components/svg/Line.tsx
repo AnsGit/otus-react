@@ -1,39 +1,15 @@
 import React from "react";
 
 interface LineProps {
-  /**
-   * Start x
-   */
   x1: number;
-  /**
-   * Start y
-   */
   y1: number;
-  /**
-   * End x
-   */
   x2: number;
-  /**
-   * End y
-   */
   y2: number;
-  /**
-   * Line width
-   */
   strokeWidth?: number;
-  /**
-   * Line color
-   */
   stroke?: string;
-  /**
-   * Custom Styles
-   */
   style?: {};
 }
 
-/**
- * Line
- */
 const Line: React.FC<LineProps> = ({
   x1,
   y1,

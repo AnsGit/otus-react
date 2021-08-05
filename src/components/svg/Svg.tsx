@@ -1,23 +1,11 @@
 import React from "react";
 
 interface SvgProps {
-  /**
-   * Svg width
-   */
   width: number;
-  /**
-   * Svg height
-   */
   height: number;
-  /**
-   * Custom Styles
-   */
   style: {};
 }
 
-/**
- * Svg
- */
 const Svg: React.FC<SvgProps> = ({
   width = 800,
   height = 600,

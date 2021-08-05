@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Svg from "./Svg";
 
 export default {
-  title: "Pixel Art Box/Svg/Instance",
+  title: "Pixel Art Box/Svg/Svg",
   component: Svg,
 } as ComponentMeta<typeof Svg>;
 

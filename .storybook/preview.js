@@ -13,10 +13,10 @@ export const parameters = {
         [
           "App",
           "Svg",
-          ["Instance", "Line", "Rect"],
+          ["Svg", "Line", "Rect"],
           "Grid",
           "Field",
-          ["Instance", "Cell"],
+          ["Field", "Cell"],
         ],
       ],
     },

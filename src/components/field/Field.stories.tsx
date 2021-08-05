@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Field from "./Field";
 
 export default {
-  title: "Pixel Art Box/Field/Instance",
+  title: "Pixel Art Box/Field/Field",
   component: Field,
   argTypes: {},
 } as ComponentMeta<typeof Field>;

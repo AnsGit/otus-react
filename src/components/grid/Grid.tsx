@@ -5,40 +5,19 @@ import { Svg, Line, Rect } from "@/components/svg";
 
 interface GridProps {
   /**
-   * Size (number of cols and rows)
+   * Size ([cols, rows])
    */
   size?: [number, number];
-  /**
-   * Cell properties
-   */
   cell?: {
-    /**
-     * Cell size (px)
-     */
     size: 10 | 20 | 30;
   };
-  /**
-   * Line properties
-   */
   line?: {
-    /**
-     * Line width
-     */
     strokeWidth: 1 | 2;
-    /**
-     * Line color
-     */
     stroke: string;
   };
-  /**
-   * Custom Styles
-   */
   style?: {};
 }
 
-/**
- * Grid
- */
 const Grid: React.FC<GridProps> = ({
   size = [40, 30],
   cell = {

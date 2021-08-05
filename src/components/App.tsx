@@ -1,46 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { Field } from "./field";
 import { Grid } from "./grid";
 
 interface AppProps {
   /**
-   * Field size (number of cols and rows)
+   * Field size ([cols, rows]). You can use this prop or matrix prop
    */
   size?: [number, number];
   /**
-   * Cell properties
+   * Cells matrix. You can use this prop or size prop
    */
+  matrix?: string[][];
   cell?: {
-    /**
-     * Cell size (px)
-     */
     size: 10 | 20 | 30;
-    /**
-     * Cell color
-     */
     color: string;
   };
-  /**
-   * Field properties
-   */
   field?: {};
-  /**
-   * To use grid?
-   */
   toUseGrid?: boolean;
-  /**
-   * Grid properties
-   */
   grid?: {
     line: {
       strokeWidth: 1 | 2;
       stroke: string;
     };
   };
-  /**
-   * Custom Styles
-   */
   style?: {};
 }
 
@@ -67,18 +50,23 @@ const App: React.FC<AppProps> = ({
   style = {},
   ...props
 }) => {
-  const [cols, rows] = size;
+  const [cols, rows] = props.matrix
+    ? [props.matrix[0].length, props.matrix.length]
+    : size;
 
   const width: number = cols * cell.size;
   const height: number = rows * cell.size;
 
-  const matrix: string[][] = _.range(rows).map((y: number) => {
-    return _.range(cols).map((x: number) => cell.color);
-  });
+  const [matrix, setMatrix] = useState(
+    props.matrix ||
+      _.range(rows).map((y: number) => {
+        return _.range(cols).map((x: number) => cell.color);
+      })
+  );
 
   return (
     <div id="app" style={{ width, height, ...style }}>
-      <Field size={size} cell={cell} matrix={matrix} {...field} />
+      <Field matrix={matrix} cell={cell} {...field} />
       {toUseGrid && <Grid size={size} cell={cell} {...grid} />}
     </div>
   );
