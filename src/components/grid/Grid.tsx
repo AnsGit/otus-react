@@ -4,10 +4,10 @@ import _ from "lodash";
 import { Svg, Line, Rect } from "@/components/svg";
 
 interface GridProps {
-  /**
-   * Size ([cols, rows])
-   */
-  size?: [number, number];
+  size?: {
+    cols: number;
+    rows: number;
+  };
   cell?: {
     size: 10 | 20 | 30;
   };
@@ -19,7 +19,10 @@ interface GridProps {
 }
 
 const Grid: React.FC<GridProps> = ({
-  size = [40, 30],
+  size = {
+    cols: 40,
+    rows: 30,
+  },
   cell = {
     size: 20,
   },
@@ -30,7 +33,7 @@ const Grid: React.FC<GridProps> = ({
   style = {},
   ...props
 }) => {
-  const [cols, rows] = size;
+  const { cols, rows } = size;
 
   const width: number = cols * cell.size;
   const height: number = rows * cell.size;

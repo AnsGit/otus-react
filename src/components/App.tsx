@@ -4,12 +4,12 @@ import { Field } from "./field";
 import { Grid } from "./grid";
 
 interface AppProps {
+  size?: {
+    cols: number;
+    rows: number;
+  };
   /**
-   * Field size ([cols, rows]). You can use this prop or matrix prop
-   */
-  size?: [number, number];
-  /**
-   * Cells matrix. You can use this prop or size prop
+   * Cells matrix
    */
   matrix?: string[][];
   cell?: {
@@ -31,7 +31,10 @@ interface AppProps {
  * App with Field and Grid
  */
 const App: React.FC<AppProps> = ({
-  size = [40, 30],
+  size = {
+    cols: 40,
+    rows: 30,
+  },
   cell = {
     size: 20,
     color: "#fff",
@@ -50,9 +53,15 @@ const App: React.FC<AppProps> = ({
   style = {},
   ...props
 }) => {
-  const [cols, rows] = props.matrix
-    ? [props.matrix[0].length, props.matrix.length]
-    : size;
+  let cols, rows;
+
+  if (props.matrix) {
+    cols = props.matrix[0].length;
+    rows = props.matrix.length;
+  } else {
+    cols = size.cols;
+    rows = size.rows;
+  }
 
   const width: number = cols * cell.size;
   const height: number = rows * cell.size;
@@ -67,7 +76,7 @@ const App: React.FC<AppProps> = ({
   return (
     <div id="app" style={{ width, height, ...style }}>
       <Field matrix={matrix} cell={cell} {...field} />
-      {toUseGrid && <Grid size={size} cell={cell} {...grid} />}
+      {toUseGrid && <Grid size={{ cols, rows }} cell={cell} {...grid} />}
     </div>
   );
 };

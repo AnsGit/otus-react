@@ -25,12 +25,12 @@ SmallCells.args = {
 
 export const MiddleCells = Template.bind({});
 MiddleCells.args = {
-  size: [20, 15],
+  size: { cols: 20, rows: 15 },
   cell: { size: 20 },
 };
 
 export const BigCells = Template.bind({});
 BigCells.args = {
-  size: [20, 15],
+  size: { cols: 20, rows: 15 },
   cell: { size: 30 },
 };

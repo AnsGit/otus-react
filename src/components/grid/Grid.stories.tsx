@@ -21,19 +21,19 @@ SmallCells.args = {
 
 export const MiddleCells = Template.bind({});
 MiddleCells.args = {
-  size: [20, 15],
+  size: { cols: 20, rows: 15 },
   cell: { size: 20 },
 };
 
 export const BigCells = Template.bind({});
 BigCells.args = {
-  size: [20, 15],
+  size: { cols: 20, rows: 15 },
   cell: { size: 30 },
 };
 
 export const Colored = Template.bind({});
 Colored.args = {
-  size: [20, 15],
+  size: { cols: 20, rows: 15 },
   cell: { size: 30 },
   line: {
     stroke: "violet",
@@ -43,7 +43,7 @@ Colored.args = {
 
 export const Thick = Template.bind({});
 Thick.args = {
-  size: [20, 15],
+  size: { cols: 20, rows: 15 },
   cell: { size: 30 },
   line: {
     strokeWidth: 2,
