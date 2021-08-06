@@ -74,7 +74,7 @@ const App: React.FC<AppProps> = ({
   );
 
   return (
-    <div id="app" style={{ width, height, ...style }}>
+    <div id="app" style={{ ...style, width, height }}>
       <Field matrix={matrix} cell={cell} {...field} />
       {toUseGrid && <Grid size={{ cols, rows }} cell={cell} {...grid} />}
     </div>
