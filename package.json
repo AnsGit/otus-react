@@ -12,7 +12,7 @@
     "prepare": "husky install",
     "storybook:start": "start-storybook -p 6006 --ci",
     "storybook:build": "build-storybook",
-    "chromatic": "npx chromatic --project-token=c2ee71cc79d1"
+    "chromatic": "chromatic --project-token=c2ee71cc79d1"
   },
   "husky": {
     "hooks": {
