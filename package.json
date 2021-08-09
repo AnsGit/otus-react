@@ -8,17 +8,16 @@
     "build": "webpack --mode production",
     "test": "jest",
     "lint": "eslint --ext .ts,.tsx --fix ./",
-    "loki:test": "npm run storybook:build && npx loki --requireReference --reactUri file:./storybook-static",
-    "loki:update": "npx loki update --storiesFilter='^(.)*$' --reactUri='file:./storybook-static'",
-    "check": "npm test && npm run lint && npm run test:loki",
+    "check": "npm test && npm run lint && npm run chromatic",
     "prepare": "husky install",
     "storybook:start": "start-storybook -p 6006 --ci",
-    "storybook:build": "build-storybook"
+    "storybook:build": "build-storybook",
+    "chromatic": "npx chromatic --project-token=c2ee71cc79d1"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint",
-      "pre-push": "npm test && npm run loki:test"
+      "pre-push": "npm test && npm run chromatic"
     }
   },
   "repository": {
@@ -51,6 +50,7 @@
     "@typescript-eslint/parser": "^4.28.2",
     "babel-jest": "^27.0.6",
     "babel-loader": "^8.2.2",
+    "chromatic": "^5.10.0-canary.0",
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^24.3.6",
@@ -58,7 +58,6 @@
     "html-webpack-plugin": "^5.3.2",
     "husky": "^7.0.1",
     "jest": "^27.0.6",
-    "loki": "^0.28.1",
     "prettier": "^2.3.2",
     "ts-node": "^10.1.0",
     "typescript": "^4.3.5",
