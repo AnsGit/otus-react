@@ -12,12 +12,12 @@
     "prepare": "husky install",
     "storybook:start": "start-storybook -p 6006 --ci",
     "storybook:build": "build-storybook",
-    "chromatic": "chromatic --project-token=c2ee71cc79d1"
+    "chromatic": "chromatic"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint",
-      "pre-push": "npm test && npm run chromatic"
+      "pre-push": "npm test"
     }
   },
   "repository": {
