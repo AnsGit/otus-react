@@ -9,7 +9,7 @@ type FIXME = any;
 export const omit = <T extends Record<any, any>, K extends keyof T>(
   obj: T,
   keyToOmit: K
-): FIXME => {
+): { [P in Exclude<keyof T, K>]: T[P] } => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { [keyToOmit]: _, ...withoutKey } = obj;
   return withoutKey;
