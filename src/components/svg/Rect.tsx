@@ -24,6 +24,7 @@ const Rect: React.FC<RectProps> = ({
 }) => {
   return (
     <rect
+      role="rect"
       x={x}
       y={y}
       width={width}

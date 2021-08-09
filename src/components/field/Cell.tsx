@@ -20,6 +20,8 @@ const Cell: React.FC<CellProps> = ({
 }) => {
   return (
     <Rect
+      className="cell"
+      role="cell"
       x={x * size}
       y={y * size}
       width={size}

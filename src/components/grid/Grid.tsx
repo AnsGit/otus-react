@@ -39,7 +39,13 @@ const Grid: React.FC<GridProps> = ({
   const height: number = rows * cell.size;
 
   return (
-    <Svg className="grid" width={width} height={height} style={style}>
+    <Svg
+      className="grid"
+      role="grid"
+      width={width}
+      height={height}
+      style={style}
+    >
       <Rect
         x={line.strokeWidth / 2}
         y={line.strokeWidth / 2}

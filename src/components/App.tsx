@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import _ from "lodash";
 
 import { Field } from "./field";
 import { Grid } from "./grid";
@@ -74,7 +75,7 @@ const App: React.FC<AppProps> = ({
   );
 
   return (
-    <div id="app" style={{ ...style, width, height }}>
+    <div id="app" role="app" style={{ ...style, width, height }}>
       <Field matrix={matrix} cell={cell} {...field} />
       {toUseGrid && <Grid size={{ cols, rows }} cell={cell} {...grid} />}
     </div>

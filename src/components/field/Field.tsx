@@ -37,7 +37,13 @@ const Field: React.FC<FieldProps> = ({
   const height: number = rows * cell.size;
 
   return (
-    <Svg className="field" width={width} height={height} style={style}>
+    <Svg
+      className="field"
+      role="field"
+      width={width}
+      height={height}
+      style={style}
+    >
       {matrix.map((row: string[], y: number) => {
         return row.map((color: string, x: number) => (
           <Cell key={`${x}_${y}`} x={x} y={y} color={color} size={cell.size} />
