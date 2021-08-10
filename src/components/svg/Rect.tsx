@@ -9,7 +9,7 @@ interface RectProps {
   stroke?: string;
   fill?: string;
   onClick?: () => void;
-  style?: {};
+  style?: Record<string, string>;
 }
 
 const Rect: React.FC<RectProps> = ({

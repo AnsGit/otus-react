@@ -17,7 +17,7 @@ interface AppProps {
     size: 10 | 20 | 30;
     color: string;
   };
-  field?: {};
+  field?: Record<string, any>;
   toUseGrid?: boolean;
   grid?: {
     line: {
@@ -25,7 +25,7 @@ interface AppProps {
       stroke: string;
     };
   };
-  style?: {};
+  style?: Record<string, string>;
 }
 
 /**

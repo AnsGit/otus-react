@@ -7,7 +7,7 @@ interface LineProps {
   y2: number;
   strokeWidth?: number;
   stroke?: string;
-  style?: {};
+  style?: Record<string, string>;
 }
 
 const Line: React.FC<LineProps> = ({

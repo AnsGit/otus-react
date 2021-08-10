@@ -6,16 +6,7 @@
     "plugin:jest/recommended"
   ],
   "rules": {
-    "prettier/prettier": "error",
-    "@typescript-eslint/ban-types": [
-      "error",
-      {
-        "extendDefaults": true,
-        "types": {
-          "{}": false
-        }
-      }
-    ]
+    "prettier/prettier": "error"
   },
   "parserOptions": {
     "sourceType": "module",

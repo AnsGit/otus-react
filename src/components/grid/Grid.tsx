@@ -15,7 +15,7 @@ interface GridProps {
     strokeWidth: 1 | 2;
     stroke: string;
   };
-  style?: {};
+  style?: Record<string, string>;
 }
 
 const Grid: React.FC<GridProps> = ({

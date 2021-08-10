@@ -8,7 +8,7 @@ interface CellProps {
   color?: string;
   size?: 10 | 20 | 30;
   onClick?: (x: number, y: number) => void;
-  style?: {};
+  style?: Record<string, string>;
 }
 
 const Cell: React.FC<CellProps> = ({

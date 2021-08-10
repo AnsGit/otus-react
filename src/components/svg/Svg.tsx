@@ -1,9 +1,9 @@
 import React from "react";
 
 interface SvgProps {
-  width: number;
-  height: number;
-  style: {};
+  width?: number;
+  height?: number;
+  style?: Record<string, string>;
 }
 
 const Svg: React.FC<SvgProps> = ({
