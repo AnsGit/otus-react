@@ -8,6 +8,7 @@ interface RectProps {
   strokeWidth?: number;
   stroke?: string;
   fill?: string;
+  onClick?: () => void;
   style?: {};
 }
 
@@ -19,6 +20,7 @@ const Rect: React.FC<RectProps> = ({
   strokeWidth = 1,
   stroke = "none",
   fill = "#ddd",
+  onClick = () => {},
   style = {},
   ...props
 }) => {
@@ -33,6 +35,7 @@ const Rect: React.FC<RectProps> = ({
       stroke={stroke}
       fill={fill}
       style={style}
+      onClick={onClick}
       {...props}
     />
   );

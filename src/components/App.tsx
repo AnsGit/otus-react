@@ -54,7 +54,7 @@ const App: React.FC<AppProps> = ({
   style = {},
   ...props
 }) => {
-  let cols, rows;
+  let cols: number, rows: number;
 
   if (props.matrix) {
     cols = props.matrix[0].length;
@@ -67,17 +67,51 @@ const App: React.FC<AppProps> = ({
   const width: number = cols * cell.size;
   const height: number = rows * cell.size;
 
+  // Matrix of cells colors
   const [matrix, setMatrix] = useState(
     props.matrix ||
-      _.range(rows).map((y: number) => {
-        return _.range(cols).map((x: number) => cell.color);
+      _.range(rows).map(() => {
+        return _.range(cols).map(() => cell.color);
       })
   );
 
+  // Clicked cell coords
+  let clickedCell: (number | null)[];
+  let setClickedCell: React.SetStateAction<typeof clickedCell>;
+  [clickedCell, setClickedCell] = useState([null, null]);
+
+  const onCellClick = (x: number, y: number) => {
+    const newMatrix = [...matrix];
+    newMatrix[y][x] = "#000";
+    setMatrix(newMatrix);
+
+    setClickedCell([x, y]);
+  };
+
   return (
     <div id="app" role="app" style={{ ...style, width, height }}>
-      <Field matrix={matrix} cell={cell} {...field} />
+      <Field
+        matrix={matrix}
+        cell={{ ...cell, onClick: onCellClick }}
+        {...field}
+      />
       {toUseGrid && <Grid size={{ cols, rows }} cell={cell} {...grid} />}
+      <div
+        style={{
+          position: "absolute",
+          height: 60,
+          width: width,
+          top: height,
+          left: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: 20,
+          fontFamily: "monospace",
+        }}
+      >
+        Clicked cell: {JSON.stringify(clickedCell)}
+      </div>
     </div>
   );
 };

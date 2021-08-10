@@ -7,6 +7,7 @@ interface CellProps {
   y: number;
   color?: string;
   size?: 10 | 20 | 30;
+  onClick?: (x: number, y: number) => void;
   style?: {};
 }
 
@@ -15,6 +16,7 @@ const Cell: React.FC<CellProps> = ({
   y,
   color = "#fff",
   size = 20,
+  onClick = (x: number, y: number) => {},
   style = {},
   ...props
 }) => {
@@ -27,6 +29,9 @@ const Cell: React.FC<CellProps> = ({
       width={size}
       height={size}
       fill={color}
+      onClick={() => {
+        onClick(x, y);
+      }}
       style={style}
     />
   );
