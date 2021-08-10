@@ -6,7 +6,7 @@
 export const omit = <T extends Record<any, any>, K extends keyof T>(
   obj: T,
   keyToOmit: K
-): { [P in Exclude<keyof T, K>]: T[P] } => {
+): Omit<T, K> => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { [keyToOmit]: _, ...withoutKey } = obj;
   return withoutKey;

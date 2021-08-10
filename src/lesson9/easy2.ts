@@ -35,6 +35,4 @@ type Order =
       fullfillmentDate: Date;
     };
 
-export const getOrderState = (
-  order: Order
-): Order extends { state: infer R } ? R : never => order.state;
+export const getOrderState = (order: Order): Order["state"] => order.state;
