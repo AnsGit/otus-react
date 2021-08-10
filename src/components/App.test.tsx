@@ -14,7 +14,7 @@ describe("App", () => {
 
     expect(screen.getAllByRole("cell")).toHaveLength(20);
   });
-  test("Render App component without grid", async () => {
+  test("Render App component without grid", () => {
     render(<App size={{ cols: 5, rows: 4 }} toUseGrid={false} />);
 
     expect(screen.getByRole("app")).toBeInTheDocument();

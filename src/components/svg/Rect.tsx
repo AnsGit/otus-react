@@ -20,7 +20,7 @@ const Rect: React.FC<RectProps> = ({
   strokeWidth = 1,
   stroke = "none",
   fill = "#ddd",
-  onClick = () => {},
+  onClick = () => null,
   style = {},
   ...props
 }) => {

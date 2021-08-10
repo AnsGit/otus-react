@@ -76,9 +76,7 @@ const App: React.FC<AppProps> = ({
   );
 
   // Clicked cell coords
-  let clickedCell: (number | null)[];
-  let setClickedCell: React.SetStateAction<typeof clickedCell>;
-  [clickedCell, setClickedCell] = useState([null, null]);
+  const [clickedCell, setClickedCell] = useState([null, null]);
 
   const onCellClick = (x: number, y: number) => {
     const newMatrix = [...matrix];

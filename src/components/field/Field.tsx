@@ -28,7 +28,7 @@ const Field: React.FC<FieldProps> = ({
   ],
   cell = {
     size: 20,
-    onClick: (x: number, y: number) => {},
+    onClick: (x: number, y: number) => [x, y],
   },
   style = {},
   ...props
