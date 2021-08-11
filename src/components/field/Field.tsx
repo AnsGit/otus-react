@@ -13,6 +13,7 @@ interface FieldProps {
   cell?: {
     size: 10 | 20 | 30;
     onClick: (x: number, y: number) => void;
+    onMouseEnter: (x: number, y: number) => void;
   };
 }
 
@@ -30,6 +31,7 @@ const Field: React.FC<FieldProps> = ({
   cell = {
     size: 20,
     onClick: (x: number, y: number) => [x, y],
+    onMouseEnter: (x: number, y: number) => [x, y],
   },
   ...props
 }) => {
@@ -49,6 +51,7 @@ const Field: React.FC<FieldProps> = ({
             color={color}
             size={cell.size}
             onClick={cell.onClick}
+            onMouseEnter={cell.onMouseEnter}
           />
         ));
       })}

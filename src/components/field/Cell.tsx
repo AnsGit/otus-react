@@ -10,6 +10,7 @@ interface CellProps {
   color?: string;
   size?: 10 | 20 | 30;
   onClick?: (x: number, y: number) => void;
+  onMouseEnter?: (x: number, y: number) => void;
 }
 
 const Cell: React.FC<CellProps> = ({
@@ -18,6 +19,7 @@ const Cell: React.FC<CellProps> = ({
   color = "#fff",
   size = 20,
   onClick = (x: number, y: number) => [x, y],
+  onMouseEnter = (x: number, y: number) => [x, y],
   ...props
 }) => {
   return (
@@ -31,6 +33,9 @@ const Cell: React.FC<CellProps> = ({
       fill={color}
       onClick={() => {
         onClick(x, y);
+      }}
+      onMouseEnter={() => {
+        onMouseEnter(x, y);
       }}
       style={style}
     />

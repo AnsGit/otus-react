@@ -1,6 +1,14 @@
-:global {
-  #app {
+:global(#app) {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #e600ff1c;
+  padding: 20px;
+  border-radius: 20px;
+
+  .inner {
     position: relative;
-    display: inline-block;
+    display: block;
   }
 }

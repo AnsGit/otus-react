@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
 
-import "./App.scss";
+import style from "./App.scss";
 
 import { Field } from "./field";
 import { Grid } from "./grid";
+import { Status } from "./status";
 
 interface AppProps {
   size?: {
@@ -61,9 +62,6 @@ const App: React.FC<AppProps> = ({
     rows = size.rows;
   }
 
-  const width: number = cols * cell.size;
-  const height: number = rows * cell.size;
-
   // Matrix of cells colors
   const [matrix, setMatrix] = useState(
     props.matrix ||
@@ -72,40 +70,33 @@ const App: React.FC<AppProps> = ({
       })
   );
 
-  // Clicked cell coords
-  const [clickedCell, setClickedCell] = useState([null, null]);
-
+  // Click to cell
   const onCellClick = (x: number, y: number) => {
     const newMatrix = [...matrix];
     newMatrix[y][x] = "#000";
     setMatrix(newMatrix);
+  };
 
-    setClickedCell([x, y]);
+  // Current cell coords
+  const [currentCell, setCurrentCell] = useState([null, null]);
+  const onCellMouseEnter = (x: number, y: number) => {
+    setCurrentCell([x, y]);
   };
 
   return (
-    <div id="app" role="app" style={{ width, height }}>
-      <Field
-        matrix={matrix}
-        cell={{ ...cell, onClick: onCellClick }}
-        {...field}
-      />
-      {toUseGrid && <Grid size={{ cols, rows }} cell={cell} {...grid} />}
-      <div
-        style={{
-          position: "absolute",
-          height: 60,
-          width: width,
-          top: height,
-          left: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: 20,
-          fontFamily: "monospace",
-        }}
-      >
-        Clicked cell: {JSON.stringify(clickedCell)}
+    <div id="app" role="app">
+      <div className={style.inner}>
+        <Field
+          matrix={matrix}
+          cell={{
+            ...cell,
+            onClick: onCellClick,
+            onMouseEnter: onCellMouseEnter,
+          }}
+          {...field}
+        />
+        {toUseGrid && <Grid size={{ cols, rows }} cell={cell} {...grid} />}
+        <Status currentCell={currentCell} />
       </div>
     </div>
   );
