@@ -1,6 +1,8 @@
 import React from "react";
 import _ from "lodash";
 
+import style from "./Grid.scss";
+
 import { Svg, Line, Rect } from "@/components/svg";
 
 interface GridProps {
@@ -15,7 +17,6 @@ interface GridProps {
     strokeWidth: 1 | 2;
     stroke: string;
   };
-  style?: Record<string, string>;
 }
 
 const Grid: React.FC<GridProps> = ({
@@ -30,7 +31,6 @@ const Grid: React.FC<GridProps> = ({
     strokeWidth: 1,
     stroke: "#ddd",
   },
-  style = {},
   ...props
 }) => {
   const { cols, rows } = size;
@@ -39,13 +39,7 @@ const Grid: React.FC<GridProps> = ({
   const height: number = rows * cell.size;
 
   return (
-    <Svg
-      className="grid"
-      role="grid"
-      width={width}
-      height={height}
-      style={style}
-    >
+    <Svg className={style.grid} role="grid" width={width} height={height}>
       <Rect
         x={line.strokeWidth / 2}
         y={line.strokeWidth / 2}

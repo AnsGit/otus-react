@@ -1,5 +1,7 @@
 import React from "react";
 
+import style from "./Field.scss";
+
 import { Svg } from "@/components/svg";
 import Cell from "./Cell";
 
@@ -12,7 +14,6 @@ interface FieldProps {
     size: 10 | 20 | 30;
     onClick: (x: number, y: number) => void;
   };
-  style?: Record<string, string>;
 }
 
 const Field: React.FC<FieldProps> = ({
@@ -30,7 +31,6 @@ const Field: React.FC<FieldProps> = ({
     size: 20,
     onClick: (x: number, y: number) => [x, y],
   },
-  style = {},
   ...props
 }) => {
   const [cols, rows] = [matrix[0].length, matrix.length];
@@ -39,13 +39,7 @@ const Field: React.FC<FieldProps> = ({
   const height: number = rows * cell.size;
 
   return (
-    <Svg
-      className="field"
-      role="field"
-      width={width}
-      height={height}
-      style={style}
-    >
+    <Svg className={style.field} role="field" width={width} height={height}>
       {matrix.map((row: string[], y: number) => {
         return row.map((color: string, x: number) => (
           <Cell

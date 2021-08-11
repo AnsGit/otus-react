@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
 
+import "./App.scss";
+
 import { Field } from "./field";
 import { Grid } from "./grid";
 
@@ -25,7 +27,6 @@ interface AppProps {
       stroke: string;
     };
   };
-  style?: Record<string, string>;
 }
 
 /**
@@ -40,18 +41,14 @@ const App: React.FC<AppProps> = ({
     size: 20,
     color: "#fff",
   },
-  field = {
-    style: { position: "absolute" },
-  },
+  field = {},
   toUseGrid = true,
   grid = {
     line: {
       strokeWidth: 1,
       stroke: "#ddd",
     },
-    style: { position: "absolute", pointerEvents: "none" },
   },
-  style = {},
   ...props
 }) => {
   let cols: number, rows: number;
@@ -87,7 +84,7 @@ const App: React.FC<AppProps> = ({
   };
 
   return (
-    <div id="app" role="app" style={{ ...style, width, height }}>
+    <div id="app" role="app" style={{ width, height }}>
       <Field
         matrix={matrix}
         cell={{ ...cell, onClick: onCellClick }}
