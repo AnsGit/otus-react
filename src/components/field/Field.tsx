@@ -1,4 +1,5 @@
 import React from "react";
+import _ from "lodash";
 
 import style from "./Field.scss";
 
@@ -17,46 +18,64 @@ interface FieldProps {
   };
 }
 
-const Field: React.FC<FieldProps> = ({
-  matrix = [
-    ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
-    ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
-    ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
-    ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
-    ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
-    ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
-    ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
-    ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
-  ],
-  cell = {
-    size: 20,
-    onClick: (x: number, y: number) => [x, y],
-    onMouseEnter: (x: number, y: number) => [x, y],
-  },
-  ...props
-}) => {
-  const [cols, rows] = [matrix[0].length, matrix.length];
+interface FieldState {}
 
-  const width: number = cols * cell.size;
-  const height: number = rows * cell.size;
+class Field extends React.Component<FieldProps, FieldState> {
+  static defaultProps = {
+    matrix: [
+      ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
+      ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
+      ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
+      ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
+      ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
+      ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
+      ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
+      ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
+    ],
+    cell: {
+      size: 20,
+      onClick: (x: number, y: number) => [x, y],
+      onMouseEnter: (x: number, y: number) => [x, y],
+    },
+  };
 
-  return (
-    <Svg className={style.field} role="field" width={width} height={height}>
-      {matrix.map((row: string[], y: number) => {
-        return row.map((color: string, x: number) => (
-          <Cell
-            key={`${x}_${y}`}
-            x={x}
-            y={y}
-            color={color}
-            size={cell.size}
-            onClick={cell.onClick}
-            onMouseEnter={cell.onMouseEnter}
-          />
-        ));
-      })}
-    </Svg>
-  );
-};
+  props: FieldProps;
+  state: FieldState;
+
+  shouldComponentUpdate(newProps: FieldProps) {
+    const toUpdate =
+      // Checking of the matrix changing is more priority
+      !_.isEqual(this.props.matrix, newProps.matrix) ||
+      !_.isEqual(this.props.cell, newProps.cell);
+
+    return toUpdate;
+  }
+
+  render() {
+    const { cell, matrix } = this.props;
+    const [cols, rows] = [matrix[0].length, matrix.length];
+
+    const width: number = cols * cell.size;
+    const height: number = rows * cell.size;
+
+    return (
+      <Svg className={style.field} role="field" width={width} height={height}>
+        {matrix.map((row: string[], y: number) => {
+          return row.map((color: string, x: number) => (
+            <Cell
+              key={`${x}_${y}`}
+              x={x}
+              y={y}
+              color={color}
+              size={cell.size}
+              onClick={cell.onClick}
+              onMouseEnter={cell.onMouseEnter}
+            />
+          ));
+        })}
+      </Svg>
+    );
+  }
+}
 
 export default Field;

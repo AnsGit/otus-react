@@ -37,6 +37,8 @@ interface AppState {
   };
   matrix: string[][];
   currentCell: [number, number];
+  // TODO: remove after approval
+  filledCellsStatisticsTimer: ReturnType<typeof setTimeout>;
 }
 
 /**
@@ -85,14 +87,99 @@ class App extends React.Component<AppProps, AppState> {
         : { ...props.size },
       // Cell under the cursor
       currentCell: [null, null],
+      filledCellsStatisticsTimer: null,
     };
 
     this.onCellClick = this.onCellClick.bind(this);
     this.onCellMouseEnter = this.onCellMouseEnter.bind(this);
   }
 
+  async componentDidMount() {
+    // Getting info from server (TODO: remove after approval)
+    await fetch("https://jsonplaceholder.typicode.com/todos/1")
+      .then((response) => response.json())
+      .then((json) => console.log(json));
+
+    // Output filled cells count to console (TODO: remove after approval)
+    this.state.filledCellsStatisticsTimer = setInterval(() => {
+      const filledCellsCount = this.state.matrix.reduce(
+        (acc: number, row: string[]) => {
+          return acc + row.filter((c: string) => c !== "#fff").length;
+        },
+        0
+      );
+      console.log(`FILLED CELLS COUNT: ${filledCellsCount}`);
+    }, 10000);
+  }
+
+  shouldComponentUpdate(nextProps: AppProps, nextState: AppState) {
+    const toUpdate =
+      !_.isEqual(this.state.currentCell, nextState.currentCell) ||
+      !_.isEqual(this.state.matrix, nextState.matrix) ||
+      !_.isEqual(this.props, nextProps);
+
+    return toUpdate;
+  }
+
+  componentDidUpdate() {
+    // Fill all cells around every single filled (TODO: remove after approval)
+    const matrix = JSON.parse(JSON.stringify(this.state.matrix));
+
+    const cellsToFill = matrix.reduce(
+      (acc: [number, number][], row: string[], y: number) => {
+        return [
+          ...acc,
+          ...row.reduce((acc: [number, number][], c: string, x: number) => {
+            if (c == "#000") {
+              const closedCells: [number, number][] = [
+                [x - 1, y - 1],
+                [x, y - 1],
+                [x + 1, y - 1],
+                [x + 1, y],
+                [x + 1, y + 1],
+                [x, y + 1],
+                [x - 1, y + 1],
+                [x - 1, y],
+              ];
+
+              const toAddClosedCells: boolean = closedCells.every(
+                ([cX, cY]) => {
+                  return (
+                    !matrix[cY] || !matrix[cY][cX] || matrix[cY][cX] != "#000"
+                  );
+                }
+              );
+
+              if (toAddClosedCells) {
+                acc.push(...closedCells);
+              }
+            }
+
+            return acc;
+          }, []),
+        ];
+      },
+      []
+    );
+
+    if (cellsToFill.length) {
+      cellsToFill.forEach(([x, y]) => {
+        if (matrix[y] && matrix[y][x]) {
+          matrix[y][x] = "#000";
+        }
+      });
+
+      this.setState({ matrix });
+    }
+  }
+
+  componentWillUnmount() {
+    // TODO: remove after approval
+    clearInterval(this.state.filledCellsStatisticsTimer);
+  }
+
   onCellClick(x: number, y: number) {
-    const matrix = [...this.state.matrix];
+    const matrix = JSON.parse(JSON.stringify(this.state.matrix));
     matrix[y][x] = "#000";
     this.setState({ matrix });
   }

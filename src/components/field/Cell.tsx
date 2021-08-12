@@ -1,4 +1,5 @@
 import React from "react";
+import _ from "lodash";
 
 import { Rect } from "@/components/svg";
 
@@ -13,33 +14,48 @@ interface CellProps {
   onMouseEnter?: (x: number, y: number) => void;
 }
 
-const Cell: React.FC<CellProps> = ({
-  x,
-  y,
-  color = "#fff",
-  size = 20,
-  onClick = (x: number, y: number) => [x, y],
-  onMouseEnter = (x: number, y: number) => [x, y],
-  ...props
-}) => {
-  return (
-    <Rect
-      className={style.cell}
-      role="cell"
-      x={x * size}
-      y={y * size}
-      width={size}
-      height={size}
-      fill={color}
-      onClick={() => {
-        onClick(x, y);
-      }}
-      onMouseEnter={() => {
-        onMouseEnter(x, y);
-      }}
-      style={style}
-    />
-  );
-};
+interface CellState {}
+
+class Cell extends React.Component<CellProps, CellState> {
+  static defaultProps = {
+    color: "#fff",
+    size: 20,
+    onClick: (x: number, y: number) => [x, y],
+    onMouseEnter: (x: number, y: number) => [x, y],
+  };
+
+  props: CellProps;
+  state: CellState;
+
+  shouldComponentUpdate(newProps: CellProps) {
+    // Checking of the color changing is more priority
+    const toUpdate =
+      this.props.color !== newProps.color || !_.isEqual(this.props, newProps);
+
+    return toUpdate;
+  }
+
+  render() {
+    const { x, y, color, size, onClick, onMouseEnter } = this.props;
+
+    return (
+      <Rect
+        className={style.cell}
+        role="cell"
+        x={x * size}
+        y={y * size}
+        width={size}
+        height={size}
+        fill={color}
+        onClick={() => {
+          onClick(x, y);
+        }}
+        onMouseEnter={() => {
+          onMouseEnter(x, y);
+        }}
+      />
+    );
+  }
+}
 
 export default Cell;

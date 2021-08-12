@@ -19,48 +19,61 @@ interface GridProps {
   };
 }
 
-const Grid: React.FC<GridProps> = ({
-  size = {
-    cols: 40,
-    rows: 30,
-  },
-  cell = {
-    size: 20,
-  },
-  line = {
-    strokeWidth: 1,
-    stroke: "#ddd",
-  },
-  ...props
-}) => {
-  const { cols, rows } = size;
+interface GridState {}
 
-  const width: number = cols * cell.size;
-  const height: number = rows * cell.size;
+class Grid extends React.Component<GridProps, GridState> {
+  static defaultProps: GridProps = {
+    size: {
+      cols: 40,
+      rows: 30,
+    },
+    cell: {
+      size: 20,
+    },
+    line: {
+      strokeWidth: 1,
+      stroke: "#ddd",
+    },
+  };
 
-  return (
-    <Svg className={style.grid} role="grid" width={width} height={height}>
-      <Rect
-        x={line.strokeWidth / 2}
-        y={line.strokeWidth / 2}
-        width={width - line.strokeWidth}
-        height={height - line.strokeWidth}
-        strokeWidth={line.strokeWidth}
-        stroke={line.stroke}
-        fill="none"
-      />
-      {_.range(1, cols).map((x: number) => {
-        const left: number = x * cell.size;
-        return (
-          <Line key={x} x1={left} y1={0} x2={left} y2={height} {...line} />
-        );
-      })}
-      {_.range(1, rows).map((y: number) => {
-        const top: number = y * cell.size;
-        return <Line key={y} x1={0} y1={top} x2={width} y2={top} {...line} />;
-      })}
-    </Svg>
-  );
-};
+  props: GridProps;
+  state: GridState;
+
+  shouldComponentUpdate(newProps: GridProps) {
+    return !_.isEqual(this.props, newProps);
+  }
+
+  render() {
+    const { cols, rows } = this.props.size;
+    const { cell, line } = this.props;
+
+    const width: number = cols * cell.size;
+    const height: number = rows * cell.size;
+
+    return (
+      <Svg className={style.grid} role="grid" width={width} height={height}>
+        <Rect
+          x={line.strokeWidth / 2}
+          y={line.strokeWidth / 2}
+          width={width - line.strokeWidth}
+          height={height - line.strokeWidth}
+          strokeWidth={line.strokeWidth}
+          stroke={line.stroke}
+          fill="none"
+        />
+        {_.range(1, cols).map((x: number) => {
+          const left: number = x * cell.size;
+          return (
+            <Line key={x} x1={left} y1={0} x2={left} y2={height} {...line} />
+          );
+        })}
+        {_.range(1, rows).map((y: number) => {
+          const top: number = y * cell.size;
+          return <Line key={y} x1={0} y1={top} x2={width} y2={top} {...line} />;
+        })}
+      </Svg>
+    );
+  }
+}
 
 export default Grid;
