@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import _ from "lodash";
 
 import style from "./App.scss";
@@ -30,76 +30,102 @@ interface AppProps {
   };
 }
 
+interface AppState {
+  size: {
+    cols: number;
+    rows: number;
+  };
+  matrix: string[][];
+  currentCell: [number, number];
+}
+
 /**
  * App with Field and Grid
  */
-const App: React.FC<AppProps> = ({
-  size = {
-    cols: 40,
-    rows: 30,
-  },
-  cell = {
-    size: 20,
-    color: "#fff",
-  },
-  field = {},
-  toUseGrid = true,
-  grid = {
-    line: {
-      strokeWidth: 1,
-      stroke: "#ddd",
+class App extends React.Component<AppProps, AppState> {
+  static defaultProps: AppProps = {
+    size: {
+      cols: 40,
+      rows: 30,
     },
-  },
-  ...props
-}) => {
-  let cols: number, rows: number;
+    cell: {
+      size: 20,
+      color: "#fff",
+    },
+    field: {},
+    toUseGrid: true,
+    grid: {
+      line: {
+        strokeWidth: 1,
+        stroke: "#ddd",
+      },
+    },
+  };
 
-  if (props.matrix) {
-    cols = props.matrix[0].length;
-    rows = props.matrix.length;
-  } else {
-    cols = size.cols;
-    rows = size.rows;
+  props: AppProps;
+  state: AppState;
+  setState: React.SetStateAction<Partial<AppState>>;
+
+  constructor(props: AppProps) {
+    super(props);
+
+    this.state = {
+      // Matrix of cells colors
+      matrix:
+        props.matrix ||
+        _.range(props.size.rows).map(() => {
+          return _.range(props.size.cols).map(() => props.cell.color);
+        }),
+      // Number of cols and rows in the matrix
+      size: props.matrix
+        ? {
+            cols: props.matrix[0].length,
+            rows: props.matrix.length,
+          }
+        : { ...props.size },
+      // Cell under the cursor
+      currentCell: [null, null],
+    };
+
+    this.onCellClick = this.onCellClick.bind(this);
+    this.onCellMouseEnter = this.onCellMouseEnter.bind(this);
   }
 
-  // Matrix of cells colors
-  const [matrix, setMatrix] = useState(
-    props.matrix ||
-      _.range(rows).map(() => {
-        return _.range(cols).map(() => cell.color);
-      })
-  );
+  onCellClick(x: number, y: number) {
+    const matrix = [...this.state.matrix];
+    matrix[y][x] = "#000";
+    this.setState({ matrix });
+  }
 
-  // Click to cell
-  const onCellClick = (x: number, y: number) => {
-    const newMatrix = [...matrix];
-    newMatrix[y][x] = "#000";
-    setMatrix(newMatrix);
-  };
+  onCellMouseEnter(x: number, y: number) {
+    this.setState({ currentCell: [x, y] });
+  }
 
-  // Current cell coords
-  const [currentCell, setCurrentCell] = useState([null, null]);
-  const onCellMouseEnter = (x: number, y: number) => {
-    setCurrentCell([x, y]);
-  };
-
-  return (
-    <div id="app" role="app">
-      <div className={style.inner}>
-        <Field
-          matrix={matrix}
-          cell={{
-            ...cell,
-            onClick: onCellClick,
-            onMouseEnter: onCellMouseEnter,
-          }}
-          {...field}
-        />
-        {toUseGrid && <Grid size={{ cols, rows }} cell={cell} {...grid} />}
-        <Status currentCell={currentCell} />
+  render() {
+    return (
+      <div id="app" role="app">
+        <div className={style.inner}>
+          <Field
+            matrix={this.state.matrix}
+            cell={{
+              ...this.props.cell,
+              onClick: this.onCellClick,
+              onMouseEnter: this.onCellMouseEnter,
+            }}
+            {...this.props.field}
+          />
+          {this.props.toUseGrid && (
+            <Grid
+              size={this.state.size}
+              cell={this.props.cell}
+              {...this.props.grid}
+            />
+          )}
+          <Status currentCell={this.state.currentCell} />
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default App;
