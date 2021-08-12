@@ -14,9 +14,7 @@ interface CellProps {
   onMouseEnter?: (x: number, y: number) => void;
 }
 
-interface CellState {}
-
-class Cell extends React.Component<CellProps, CellState> {
+class Cell extends React.Component<CellProps> {
   static defaultProps = {
     color: "#fff",
     size: 20,
@@ -25,7 +23,6 @@ class Cell extends React.Component<CellProps, CellState> {
   };
 
   props: CellProps;
-  state: CellState;
 
   shouldComponentUpdate(newProps: CellProps) {
     // Checking of the color changing is more priority

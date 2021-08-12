@@ -18,9 +18,7 @@ interface FieldProps {
   };
 }
 
-interface FieldState {}
-
-class Field extends React.Component<FieldProps, FieldState> {
+class Field extends React.Component<FieldProps> {
   static defaultProps = {
     matrix: [
       ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
@@ -40,7 +38,6 @@ class Field extends React.Component<FieldProps, FieldState> {
   };
 
   props: FieldProps;
-  state: FieldState;
 
   shouldComponentUpdate(newProps: FieldProps) {
     const toUpdate =
