@@ -6,13 +6,15 @@ import App from "./App";
 
 describe("App", () => {
   test("Render App component with grid", () => {
-    render(<App size={{ cols: 5, rows: 4 }} />);
+    const [cols, rows] = [5, 4];
+
+    render(<App size={{ cols, rows }} />);
 
     expect(screen.getByRole("app")).toBeInTheDocument();
     expect(screen.getByRole("field")).toBeInTheDocument();
     expect(screen.getByRole("grid")).toBeInTheDocument();
 
-    expect(screen.getAllByRole("cell")).toHaveLength(20);
+    expect(screen.getAllByRole("cell")).toHaveLength(cols * rows);
   });
   test("Render App component without grid", () => {
     render(<App size={{ cols: 5, rows: 4 }} toUseGrid={false} />);
