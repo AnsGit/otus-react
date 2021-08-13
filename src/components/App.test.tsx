@@ -1,6 +1,13 @@
 import React from "react";
 import _ from "lodash";
+
 import { render, screen, fireEvent } from "@testing-library/react";
+
+import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+import { shallow, configure } from "enzyme";
+configure({ adapter: new Adapter() });
+
+global.fetch = require("node-fetch");
 
 import App from "./App";
 
@@ -73,5 +80,16 @@ describe("App", () => {
     });
 
     expect(filledCells.length).toBe(8);
+  });
+  test("ComponentDidMount", async () => {
+    const app = shallow(<App />);
+
+    expect(app.state().filledCellsStatisticsTimer).toBeNull();
+    expect(app.state().userInfo).toBeNull();
+
+    await app.instance().componentDidMount();
+
+    expect(app.state().filledCellsStatisticsTimer).toBeDefined();
+    expect(app.state().userInfo).toBeDefined();
   });
 });
