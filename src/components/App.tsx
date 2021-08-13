@@ -39,6 +39,7 @@ interface AppState {
   currentCell: [number, number];
   // TODO: remove after approval
   filledCellsStatisticsTimer: ReturnType<typeof setTimeout>;
+  userInfo: Record<string, any>;
 }
 
 /**
@@ -88,6 +89,7 @@ class App extends React.Component<AppProps, AppState> {
       // Cell under the cursor
       currentCell: [null, null],
       filledCellsStatisticsTimer: null,
+      userInfo: null,
     };
 
     this.onCellClick = this.onCellClick.bind(this);
@@ -95,21 +97,25 @@ class App extends React.Component<AppProps, AppState> {
   }
 
   async componentDidMount() {
-    // Getting info from server (TODO: remove after approval)
-    await fetch("https://jsonplaceholder.typicode.com/todos/1")
+    // Getting user info from server (TODO: remove after approval)
+    await fetch("https://jsonplaceholder.typicode.com/users/1")
       .then((response) => response.json())
-      .then((json) => console.log(json));
+      .then((json) => {
+        this.setState({ userInfo: json });
+      });
 
     // Output filled cells count to console (TODO: remove after approval)
-    this.state.filledCellsStatisticsTimer = setInterval(() => {
-      const filledCellsCount = this.state.matrix.reduce(
-        (acc: number, row: string[]) => {
-          return acc + row.filter((c: string) => c !== "#fff").length;
-        },
-        0
-      );
-      console.log(`FILLED CELLS COUNT: ${filledCellsCount}`);
-    }, 10000);
+    this.setState({
+      filledCellsStatisticsTimer: setInterval(() => {
+        const filledCellsCount = this.state.matrix.reduce(
+          (acc: number, row: string[]) => {
+            return acc + row.filter((c: string) => c !== "#fff").length;
+          },
+          0
+        );
+        console.log(`FILLED CELLS COUNT: ${filledCellsCount}`);
+      }, 10000),
+    });
   }
 
   shouldComponentUpdate(nextProps: AppProps, nextState: AppState) {
