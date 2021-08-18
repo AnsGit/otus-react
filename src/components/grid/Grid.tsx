@@ -19,7 +19,7 @@ interface GridProps {
   };
 }
 
-class Grid extends React.Component<GridProps> {
+class Grid extends React.PureComponent<GridProps> {
   static defaultProps: GridProps = {
     size: {
       cols: 40,
@@ -35,10 +35,6 @@ class Grid extends React.Component<GridProps> {
   };
 
   props: GridProps;
-
-  shouldComponentUpdate(newProps: GridProps) {
-    return !_.isEqual(this.props, newProps);
-  }
 
   render() {
     const { cols, rows } = this.props.size;

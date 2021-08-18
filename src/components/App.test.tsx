@@ -81,15 +81,35 @@ describe("App", () => {
 
     expect(filledCells.length).toBe(8);
   });
-  test("ComponentDidMount", async () => {
+  test("Check filledCellsStatisticsTimer init", () => {
+    const app = shallow(<App />);
+    expect(app.state().filledCellsStatisticsTimer).toBeGreaterThan(0);
+  });
+  test("Check user info getting", async () => {
     const app = shallow(<App />);
 
-    expect(app.state().filledCellsStatisticsTimer).toBeNull();
     expect(app.state().userInfo).toBeNull();
 
-    await app.instance().componentDidMount();
+    await app.instance().getUserInfo();
+    const { userInfo } = app.state();
 
-    expect(app.state().filledCellsStatisticsTimer).toBeDefined();
-    expect(app.state().userInfo).toBeDefined();
+    [
+      "address.city",
+      "address.geo.lat",
+      "address.geo.lng",
+      "address.street",
+      "address.suite",
+      "address.zipcode",
+      "company.bs",
+      "company.catchPhrase",
+      "company.name",
+      "email",
+      "id",
+      "name",
+      "phone",
+      "username",
+    ].forEach((prop) => {
+      expect(userInfo).toHaveProperty(prop);
+    });
   });
 });

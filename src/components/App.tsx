@@ -73,36 +73,35 @@ class App extends React.Component<AppProps, AppState> {
     super(props);
 
     this.state = {
-      // Matrix of cells colors
-      matrix:
-        props.matrix ||
-        _.range(props.size.rows).map(() => {
-          return _.range(props.size.cols).map(() => props.cell.color);
-        }),
-      // Number of cols and rows in the matrix
-      size: props.matrix
-        ? {
-            cols: props.matrix[0].length,
-            rows: props.matrix.length,
-          }
-        : { ...props.size },
       // Cell under the cursor
       currentCell: [null, null],
       filledCellsStatisticsTimer: null,
       userInfo: null,
+      // Matrix of cells colors
+      matrix: null,
+      // Number of cols and rows in the matrix
+      size: null,
+    };
+
+    if (props.matrix) {
+      this.state.matrix = props.matrix;
+    } else {
+      this.state.matrix = _.range(props.size.rows).map(() => {
+        return _.range(props.size.cols).map(() => props.cell.color);
+      });
+    }
+
+    this.state.size = {
+      cols: this.state.matrix[0].length,
+      rows: this.state.matrix.length,
     };
 
     this.onCellClick = this.onCellClick.bind(this);
     this.onCellMouseEnter = this.onCellMouseEnter.bind(this);
   }
 
-  async componentDidMount() {
-    // Getting user info from server (TODO: remove after approval)
-    await fetch("https://jsonplaceholder.typicode.com/users/1")
-      .then((response) => response.json())
-      .then((json) => {
-        this.setState({ userInfo: json });
-      });
+  componentDidMount() {
+    this.getUserInfo();
 
     // Output filled cells count to console (TODO: remove after approval)
     this.setState({
@@ -184,9 +183,18 @@ class App extends React.Component<AppProps, AppState> {
     clearInterval(this.state.filledCellsStatisticsTimer);
   }
 
+  async getUserInfo() {
+    // Getting user info from server (TODO: remove after approval)
+    await fetch("https://jsonplaceholder.typicode.com/users/1")
+      .then((response) => response.json())
+      .then((json) => {
+        this.setState({ userInfo: json });
+      });
+  }
+
   onCellClick(x: number, y: number) {
-    const matrix = JSON.parse(JSON.stringify(this.state.matrix));
-    matrix[y][x] = "#000";
+    const matrix = [...this.state.matrix];
+    matrix[y] = [...matrix[y].slice(0, x), "#000", ...matrix[y].slice(x + 1)];
     this.setState({ matrix });
   }
 

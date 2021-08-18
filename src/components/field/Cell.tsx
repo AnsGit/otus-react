@@ -18,8 +18,8 @@ class Cell extends React.Component<CellProps> {
   static defaultProps = {
     color: "#fff",
     size: 20,
-    onClick: (x: number, y: number) => [x, y],
-    onMouseEnter: (x: number, y: number) => [x, y],
+    onClick: (x: number, y: number) => null,
+    onMouseEnter: (x: number, y: number) => null,
   };
 
   props: CellProps;

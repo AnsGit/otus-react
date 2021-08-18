@@ -20,16 +20,7 @@ interface FieldProps {
 
 class Field extends React.Component<FieldProps> {
   static defaultProps = {
-    matrix: [
-      ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
-      ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
-      ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
-      ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
-      ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
-      ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
-      ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
-      ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
-    ],
+    matrix: [[]],
     cell: {
       size: 20,
       onClick: (x: number, y: number) => [x, y],
