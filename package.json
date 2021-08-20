@@ -16,12 +16,6 @@
     "chromatic": "chromatic",
     "calc": "ts-node src/lessons/2"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run check",
-      "pre-push": ""
-    }
-  },
   "lint-staged": {
     "*.(ts|tsx)": [
       "npm run lint"
