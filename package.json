@@ -8,6 +8,7 @@
     "build": "webpack --mode production",
     "test": "jest",
     "lint": "eslint --ext .ts,.tsx --fix ./",
+    "lint-staged": "lint-staged",
     "check": "npm run lint && npm test",
     "prepare": "husky install",
     "storybook:start": "start-storybook -p 6006 --ci",
@@ -20,6 +21,11 @@
       "pre-commit": "npm run check",
       "pre-push": ""
     }
+  },
+  "lint-staged": {
+    "*.(ts|tsx)": [
+      "npm run lint"
+    ]
   },
   "repository": {
     "type": "git",
@@ -65,6 +71,7 @@
     "husky": "^7.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.6",
+    "lint-staged": "^11.1.2",
     "node-fetch": "^2.6.1",
     "node-sass": "^6.0.1",
     "prettier": "^2.3.2",
