@@ -128,7 +128,7 @@ class App extends React.Component<AppProps, AppState> {
 
   componentDidUpdate() {
     // Fill all cells around every single filled (TODO: remove after approval)
-    const matrix = JSON.parse(JSON.stringify(this.state.matrix));
+    const matrix = [...this.state.matrix];
 
     const cellsToFill = matrix.reduce(
       (acc: [number, number][], row: string[], y: number) => {
@@ -168,8 +168,14 @@ class App extends React.Component<AppProps, AppState> {
     );
 
     if (cellsToFill.length) {
+      const clonedRows = [];
+
       cellsToFill.forEach(([x, y]) => {
         if (matrix[y] && matrix[y][x]) {
+          if (!clonedRows.includes(y)) {
+            clonedRows.push(y);
+            matrix[y] = [...matrix[y]];
+          }
           matrix[y][x] = "#000";
         }
       });
