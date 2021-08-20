@@ -17,6 +17,7 @@ export const parameters = {
           "Grid",
           "Field",
           ["Field", "Cell"],
+          "Status",
         ],
       ],
     },

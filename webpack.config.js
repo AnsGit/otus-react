@@ -6,7 +6,7 @@ module.exports = {
   entry: "./src/index.tsx",
   devtool: "source-map",
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".scss", ".json"],
     alias: {
       "@": path.resolve(__dirname, "src"),
     },
@@ -24,6 +24,26 @@ module.exports = {
         test: /\.(js|ts)x?$/,
         loader: "babel-loader",
         exclude: /node_modules/,
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: "style-loader",
+          },
+          { loader: "css-modules-typescript-loader" },
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: "[path]--[local]",
+              },
+            },
+          },
+          {
+            loader: "sass-loader",
+          },
+        ],
       },
     ],
   },

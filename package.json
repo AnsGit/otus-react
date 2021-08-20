@@ -8,18 +8,18 @@
     "build": "webpack --mode production",
     "test": "jest",
     "lint": "eslint --ext .ts,.tsx --fix ./",
-    "check": "npm test && npm run lint && npm run chromatic",
+    "lint-staged": "lint-staged",
+    "check": "npm run lint && npm test",
     "prepare": "husky install",
     "storybook:start": "start-storybook -p 6006 --ci",
     "storybook:build": "build-storybook",
     "chromatic": "chromatic",
     "calc": "ts-node src/lessons/2"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint",
-      "pre-push": "npm test"
-    }
+  "lint-staged": {
+    "*.(ts|tsx)": [
+      "npm run lint"
+    ]
   },
   "repository": {
     "type": "git",
@@ -45,21 +45,31 @@
     "@storybook/react": "^6.4.0-alpha.18",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
+    "@types/lodash": "^4.14.172",
     "@types/react": "^17.0.14",
     "@types/react-dom": "^17.0.9",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.28.2",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
     "babel-jest": "^27.0.6",
     "babel-loader": "^8.2.2",
     "chromatic": "^5.10.0-canary.0",
+    "css-loader": "^6.2.0",
+    "css-modules-typescript-loader": "^4.0.1",
+    "enzyme": "^3.11.0",
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^24.3.6",
     "eslint-plugin-prettier": "^3.4.0",
     "html-webpack-plugin": "^5.3.2",
     "husky": "^7.0.1",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.6",
+    "lint-staged": "^11.1.2",
+    "node-sass": "^6.0.1",
     "prettier": "^2.3.2",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.2.1",
     "ts-node": "^10.1.0",
     "typescript": "^4.3.5",
     "webpack": "^5.42.1",
@@ -70,20 +80,5 @@
     "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
-  },
-  "loki": {
-    "configurations": {
-      "chrome.laptop": {
-        "target": "chrome.docker",
-        "width": 1920,
-        "height": 1080,
-        "deviceScaleFactor": 1,
-        "mobile": false
-      },
-      "chrome.iphone7": {
-        "target": "chrome.docker",
-        "preset": "iPhone 7"
-      }
-    }
   }
 }
