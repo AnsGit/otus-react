@@ -7,8 +7,6 @@ import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import { shallow, configure } from "enzyme";
 configure({ adapter: new Adapter() });
 
-global.fetch = require("node-fetch");
-
 import App from "./App";
 
 describe("App", () => {
@@ -86,13 +84,39 @@ describe("App", () => {
     expect(app.state().filledCellsStatisticsTimer).toBeGreaterThan(0);
   });
   test("Check user info getting", async () => {
-    const app = shallow(<App />);
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () =>
+          Promise.resolve({
+            id: 1,
+            name: "Leanne Graham",
+            username: "Bret",
+            email: "Sincere@april.biz",
+            address: {
+              street: "Kulas Light",
+              suite: "Apt. 556",
+              city: "Gwenborough",
+              zipcode: "92998-3874",
+              geo: { lat: "-37.3159", lng: "81.1496" },
+            },
+            phone: "1-770-736-8031 x56442",
+            website: "hildegard.org",
+            company: {
+              name: "Romaguera-Crona",
+              catchPhrase: "Multi-layered client-server neural-net",
+              bs: "harness real-time e-markets",
+            },
+          }),
+      })
+    );
 
+    const app = shallow(<App />);
     expect(app.state().userInfo).toBeNull();
 
     await app.instance().getUserInfo();
-    const { userInfo } = app.state();
+    expect(fetch).toHaveBeenCalledTimes(2);
 
+    const { userInfo } = app.state();
     [
       "address.city",
       "address.geo.lat",

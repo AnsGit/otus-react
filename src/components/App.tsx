@@ -193,8 +193,8 @@ class App extends React.Component<AppProps, AppState> {
     // Getting user info from server (TODO: remove after approval)
     await fetch("https://jsonplaceholder.typicode.com/users/1")
       .then((response) => response.json())
-      .then((json) => {
-        this.setState({ userInfo: json });
+      .then((userInfo) => {
+        this.setState({ userInfo });
       });
   }
 
