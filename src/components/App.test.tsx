@@ -41,15 +41,15 @@ describe("App", () => {
 
     render(<App size={{ cols, rows }} />);
 
-    expect(screen.getByText("Current cell: [null,null]")).toBeInTheDocument();
+    expect(screen.getByText("Current cell: [0,0]")).toBeInTheDocument();
 
     const cells = screen.getAllByRole("cell");
 
-    // Click on the first cell
+    // Mouse enter to the first cell
     fireEvent.mouseEnter(cells[0], {});
     expect(screen.getByText("Current cell: [0,0]")).toBeInTheDocument();
 
-    // Click on the last cell
+    // Mouse enter to the last cell
     fireEvent.mouseEnter(_.last(cells), {});
     expect(
       screen.getByText(`Current cell: [${cols - 1},${rows - 1}]`)

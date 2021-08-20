@@ -4,12 +4,12 @@ import _ from "lodash";
 import style from "./Status.scss";
 
 interface StatusProps {
-  currentCell?: (null | number)[];
+  currentCell?: [number, number];
 }
 
 class Status extends React.Component<StatusProps> {
   static defaultProps = {
-    currentCell: [null, null],
+    currentCell: [0, 0],
   };
 
   props: StatusProps;

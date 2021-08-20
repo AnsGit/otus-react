@@ -75,7 +75,7 @@ class App extends React.Component<AppProps, AppState> {
 
     this.state = {
       // Cell under the cursor
-      currentCell: [null, null],
+      currentCell: [0, 0],
       userInfo: null,
       // Matrix of cells colors
       matrix: null,
