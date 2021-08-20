@@ -38,7 +38,6 @@ interface AppState {
   matrix: string[][];
   currentCell: [number, number];
   // TODO: remove after approval
-  filledCellsStatisticsTimer: ReturnType<typeof setTimeout>;
   userInfo: Record<string, any>;
 }
 
@@ -69,13 +68,14 @@ class App extends React.Component<AppProps, AppState> {
   state: AppState;
   setState: React.SetStateAction<Partial<AppState>>;
 
+  filledCellsStatisticsTimer: ReturnType<typeof setTimeout> = null;
+
   constructor(props: AppProps) {
     super(props);
 
     this.state = {
       // Cell under the cursor
       currentCell: [null, null],
-      filledCellsStatisticsTimer: null,
       userInfo: null,
       // Matrix of cells colors
       matrix: null,
@@ -104,17 +104,15 @@ class App extends React.Component<AppProps, AppState> {
     this.getUserInfo();
 
     // Output filled cells count to console (TODO: remove after approval)
-    this.setState({
-      filledCellsStatisticsTimer: setInterval(() => {
-        const filledCellsCount = this.state.matrix.reduce(
-          (acc: number, row: string[]) => {
-            return acc + row.filter((c: string) => c !== "#fff").length;
-          },
-          0
-        );
-        console.log(`FILLED CELLS COUNT: ${filledCellsCount}`);
-      }, 10000),
-    });
+    this.filledCellsStatisticsTimer = setInterval(() => {
+      const filledCellsCount = this.state.matrix.reduce(
+        (acc: number, row: string[]) => {
+          return acc + row.filter((c: string) => c !== "#fff").length;
+        },
+        0
+      );
+      console.log(`FILLED CELLS COUNT: ${filledCellsCount}`);
+    }, 10000);
   }
 
   shouldComponentUpdate(nextProps: AppProps, nextState: AppState) {
@@ -186,7 +184,7 @@ class App extends React.Component<AppProps, AppState> {
 
   componentWillUnmount() {
     // TODO: remove after approval
-    clearInterval(this.state.filledCellsStatisticsTimer);
+    clearInterval(this.filledCellsStatisticsTimer);
   }
 
   async getUserInfo() {

@@ -7,6 +7,14 @@ import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import { shallow, configure } from "enzyme";
 configure({ adapter: new Adapter() });
 
+const createFetch = (result) => {
+  return jest.fn(() =>
+    Promise.resolve({
+      json: () => Promise.resolve(result),
+    })
+  );
+};
+
 import App from "./App";
 
 describe("App", () => {
@@ -81,34 +89,29 @@ describe("App", () => {
   });
   test("Check filledCellsStatisticsTimer init", () => {
     const app = shallow(<App />);
-    expect(app.state().filledCellsStatisticsTimer).toBeGreaterThan(0);
+    expect(app.instance().filledCellsStatisticsTimer).toBeGreaterThan(0);
   });
   test("Check user info getting", async () => {
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        json: () =>
-          Promise.resolve({
-            id: 1,
-            name: "Leanne Graham",
-            username: "Bret",
-            email: "Sincere@april.biz",
-            address: {
-              street: "Kulas Light",
-              suite: "Apt. 556",
-              city: "Gwenborough",
-              zipcode: "92998-3874",
-              geo: { lat: "-37.3159", lng: "81.1496" },
-            },
-            phone: "1-770-736-8031 x56442",
-            website: "hildegard.org",
-            company: {
-              name: "Romaguera-Crona",
-              catchPhrase: "Multi-layered client-server neural-net",
-              bs: "harness real-time e-markets",
-            },
-          }),
-      })
-    );
+    global.fetch = createFetch({
+      id: 1,
+      name: "Leanne Graham",
+      username: "Bret",
+      email: "Sincere@april.biz",
+      address: {
+        street: "Kulas Light",
+        suite: "Apt. 556",
+        city: "Gwenborough",
+        zipcode: "92998-3874",
+        geo: { lat: "-37.3159", lng: "81.1496" },
+      },
+      phone: "1-770-736-8031 x56442",
+      website: "hildegard.org",
+      company: {
+        name: "Romaguera-Crona",
+        catchPhrase: "Multi-layered client-server neural-net",
+        bs: "harness real-time e-markets",
+      },
+    });
 
     const app = shallow(<App />);
     expect(app.state().userInfo).toBeNull();
